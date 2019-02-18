@@ -1,0 +1,16 @@
+#image-container {
+	position:absolute;
+	margin:0px;
+	padding:0px;
+	border:0px;
+	background-color:rgba(0, 0, 255, 0.1);
+	overflow:hidden;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                  supported by Chrome and Opera */
+}

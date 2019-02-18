@@ -1,0 +1,35 @@
+#toolbox-container {
+    margin:0px;
+    padding:0px;
+    position:absolute;
+    border:1px solid black;
+    overflow: auto;
+
+    font-family:Arial, Helvetiva, Sans-serif;
+    font-size:11px;
+}
+
+#areaDefinitionContainer {
+
+}
+
+.areaDefinition {
+	display:flex;
+}
+
+.areaDefinition span {
+	flex:2;
+}
+
+.areaDefinition select {
+	flex:1;
+}
+
+
+.areaDefinition.selected {
+	background-color:rgba(0, 0, 255, 0.5);
+}
+
+.exportedContainer {
+	padding:32px;
+}

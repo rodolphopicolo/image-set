@@ -1,0 +1,22 @@
+.rect {
+	position:absolute;
+	padding:0px;
+	margin:0px;
+	border:0px;
+	width:10px;
+	height:10px;
+	background-color:rgba(0, 0, 255, 0.1)
+}
+
+.rect.selected {
+	background-color:rgba(0, 0, 255, 0.5)
+}
+
+.rect.highlighted {
+	background-color:rgba(0, 0, 255, 0.3)
+}
+
+.rect.selected.highlighted {
+	background-color:rgba(0, 0, 0, 0.5)
+}
+
