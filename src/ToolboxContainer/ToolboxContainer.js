@@ -75,7 +75,7 @@ class ToolboxContainer extends React.Component {
 
 
 			areaToRend = (
-				<div	key={area.key} 
+				<div	key={key} 
 						className={	'areaDefinition' + 
 									(this.state.selected !== null && this.state.selected === key ? ' selected' : '') + 
 									(this.state.highlighted !== null && this.state.highlighted === key ? ' highlighted' : '')
@@ -83,7 +83,7 @@ class ToolboxContainer extends React.Component {
 						onClick={this.handleClick.bind(this, key)} 
 						onMouseOver={this.handleMouseOver.bind(this, key)} 
 						onMouseOut={this.handleMouseOut.bind(this, key)}>
-					<span>key:{area.key}, x1:{area.x1}, y1:{area.y1}, x2:{area.x2}, y2:{area.y2}</span>
+					<span>key:{area.key}, {area.points.join()}</span>
 
 					<select onChange={this.handleLabelChange.bind(this, key)}>
 						<option value=""></option>

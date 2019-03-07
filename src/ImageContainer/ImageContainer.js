@@ -23,7 +23,22 @@ class ImageContainer extends React.Component {
 		this.mouseUp = this.mouseUp.bind(this);
 		this.mouseMove = this.mouseMove.bind(this);
 		this.onNewArea = this.onNewArea.bind(this);
+		this.defineArea = this.defineArea.bind(this);
 
+	}
+
+	defineArea(x1, y1, x2, y2, x3, y3, x4, y4){
+		var area = {
+			key: this.state.areasCounter
+			, points: [
+				{x:x1, y:y1}
+				, {x:x2, y:y2}
+				, {x:x3, y:y3}
+				, {x:x4, y:y4}
+			]
+		};
+
+		return area;
 	}
 
 	onNewArea(area){
@@ -31,16 +46,19 @@ class ImageContainer extends React.Component {
 	}
 
 	mouseDown(e){
-		var x = e.clientX - (PARENT_LEFT + LEFT_MARGIN);
-		var y = e.clientY - (PARENT_TOP + TOP_MARGIN);
+		var x1 = e.clientX - (PARENT_LEFT + LEFT_MARGIN);
+		var y1 = e.clientY - (PARENT_TOP + TOP_MARGIN);
 
-		var area = {
-			key: this.state.areasCounter
-			, x1: x
-			, y1: y
-			, x2: x
-			, y2: y
-		};
+		var x2 = x1;
+		var y2 = y1;
+
+		var x3 = x1;
+		var y3 = y2;
+
+		var x4 = x2;
+		var y4 = y1;
+
+		var area = this.defineArea(x1, y1, x2, y2, x3, y3, x4, y4);
 
 		this.state.areas.push(area);
 		this.setState({areas:this.state.areas, areasCounter:this.state.areasCounter + 1, dragging:true})
@@ -55,16 +73,18 @@ class ImageContainer extends React.Component {
 		var y2 = e.clientY - (PARENT_TOP + TOP_MARGIN);
 
 		var currentArea = this.state.areas[this.state.areas.length - 1];
-		var x1 = currentArea.x1
-		var y1 = currentArea.y1
+		var x1 = currentArea.points[0].x;
+		var y1 = currentArea.points[0].y;
 
-		var area = {
-			key: this.state.areasCounter
-			, x1: x1
-			, y1: y1
-			, x2: x2
-			, y2: y2
-		};
+
+		var x3 = x1;
+		var y3 = y2;
+
+		var x4 = x2;
+		var y4 = y1;
+
+		var area = this.defineArea(x1, y1, x2, y2, x3, y3, x4, y4);
+
 		this.state.areas.pop();
 		if(this.state.dragging !== true){
 			return;
@@ -87,16 +107,18 @@ class ImageContainer extends React.Component {
 		var y2 = e.clientY - (PARENT_TOP + TOP_MARGIN);
 
 		var currentArea = this.state.areas[this.state.areas.length - 1];
-		var x1 = currentArea.x1
-		var y1 = currentArea.y1
+		var x1 = currentArea.points[0].x;
+		var y1 = currentArea.points[0].y;
 
-		var area = {
-			key: this.state.areasCounter
-			, x1: x1
-			, y1: y1
-			, x2: x2
-			, y2: y2
-		};
+
+		var x3 = x1;
+		var y3 = y2;
+
+		var x4 = x2;
+		var y4 = y1;
+
+		var area = this.defineArea(x1, y1, x2, y2, x3, y3, x4, y4);
+
 		this.state.areas.pop();
 		this.state.areas.push(area);
 		this.setState({areas:this.state.areas, areasCounter:this.state.areasCounter + 1})
@@ -119,7 +141,7 @@ class ImageContainer extends React.Component {
 			, top:top + 'px'
 			, width:width + 'px'
 			, height:height + 'px'
-			, backgroundImage:'url(labels.jpg)'
+			, backgroundImage:'url(map.png)'
 			, backgroundSize:'800px'
 		};
 
@@ -132,6 +154,7 @@ class ImageContainer extends React.Component {
 						y1={area.y1} 
 						x2={area.x2} 
 						y2={area.y2} 
+						points={area.points}
 						selected={selectedArea != null && area.key === selectedArea ? true: false}
 						highlighted={highlightedArea != null && area.key === highlightedArea ? true: false}
 				/>
@@ -141,13 +164,15 @@ class ImageContainer extends React.Component {
 
 
         return (
-	    	<div	id="image-container" style={style} 
+	    	<svg	id="image-container" style={style} 
 	    			onMouseDown={this.mouseDown}
 	    			onMouseUp={this.mouseUp}
 	    			onMouseOut={this.mouseOut}
-	    			onMouseMove={this.mouseMove}>
+	    			onMouseMove={this.mouseMove}
+	    			height={height}
+	    			width={width}>
 	            {areasToRender}
-	        </div>
+	        </svg>
         );
     };
 }
